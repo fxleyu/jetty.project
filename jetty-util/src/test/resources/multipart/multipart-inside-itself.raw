@@ -1,0 +1,42 @@
+--zA-2i7bvSdxkqFT-79o60LpjCFE7TMpd-na
+Content-Disposition: form-data; name="reporter"
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+<user@company.com>
+--zA-2i7bvSdxkqFT-79o60LpjCFE7TMpd-na
+Content-Disposition: form-data; name="timestamp"
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+2018-03-21T18:52:18+00:00
+--zA-2i7bvSdxkqFT-79o60LpjCFE7TMpd-na
+Content-Disposition: form-data; name="comments"
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+this couldn't be parsed
+--zA-2i7bvSdxkqFT-79o60LpjCFE7TMpd-na
+Content-Disposition: form-data; name="attachment"
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+--4T5BVNUEk-Rh2Jt0I8zuREcx9woWvIkADLY
+Content-Disposition: form-data; name="fruit"
+
+banana
+--4T5BVNUEk-Rh2Jt0I8zuREcx9woWvIkADLY
+Content-Disposition: form-data; name="color"
+
+yellow
+--4T5BVNUEk-Rh2Jt0I8zuREcx9woWvIkADLY
+Content-Disposition: form-data; name="cost"
+
+$0.12 USG
+--4T5BVNUEk-Rh2Jt0I8zuREcx9woWvIkADLY
+Content-Disposition: form-data; name="comments"
+
+--zA-2i7bvSdxkqFT-79o60LpjCFE7TMpd-na
+--4T5BVNUEk-Rh2Jt0I8zuREcx9woWvIkADLY--
+
+--zA-2i7bvSdxkqFT-79o60LpjCFE7TMpd-na--
