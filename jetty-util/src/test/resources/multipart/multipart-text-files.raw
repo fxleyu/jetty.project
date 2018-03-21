@@ -1,11 +1,11 @@
---Vq7KpaF9MliKd6G81a9vyWSEPCQ1db
+--ny9C5eIZL7fsfPY9ONPy8Lxb6tkgEv1
 Content-Disposition: form-data; name="text"
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 text default
 
---Vq7KpaF9MliKd6G81a9vyWSEPCQ1db
+--ny9C5eIZL7fsfPY9ONPy8Lxb6tkgEv1
 Content-Type: text/plain; charset=UTF-8
 X-SHA1: 588A0F273CB5AFE9C8D76DD081812E672F2061E2
 Content-Disposition: form-data; name="file1"; filename="a.txt"
@@ -13,12 +13,11 @@ Content-Transfer-Encoding: binary
 
 Content of a.txt
 
---Vq7KpaF9MliKd6G81a9vyWSEPCQ1db
+--ny9C5eIZL7fsfPY9ONPy8Lxb6tkgEv1
 Content-Type: text/html; charset=UTF-8
 X-SHA1: 9A9005159AB90A6D2D9BACB5414EFE932F0CED85
 Content-Disposition: form-data; name="file2"; filename="a.html"
 Content-Transfer-Encoding: binary
 
-Content of a.txt
-
---Vq7KpaF9MliKd6G81a9vyWSEPCQ1db--
+<!DOCTYPE html><title>Content of a.html.</title>
+--ny9C5eIZL7fsfPY9ONPy8Lxb6tkgEv1--

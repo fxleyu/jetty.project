@@ -18,6 +18,7 @@
 
 package org.eclipse.jetty.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -27,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.DigestOutputStream;
@@ -51,8 +53,8 @@ import org.junit.runners.Parameterized;
 public class MultiPartParsingTest
 {
 
-    public static final int MAX_FILE_SIZE = 1024;
-    public static final int MAX_REQUEST_SIZE = 1024;
+    public static final int MAX_FILE_SIZE = 60 * 1024;
+    public static final int MAX_REQUEST_SIZE = 1024 * 1024;
     public static final int FILE_SIZE_THRESHOLD = 50;
 
     @Parameterized.Parameters(name = "{0}")
@@ -64,6 +66,18 @@ public class MultiPartParsingTest
         ret.add(new String[]{"multipart-base64"});
         ret.add(new String[]{"multipart-base64-long"});
         ret.add(new String[]{"multipart-complex"});
+        ret.add(new String[]{"multipart-duplicate-names-1"});
+        ret.add(new String[]{"multipart-encoding-mess"});
+        ret.add(new String[]{"multipart-inside-itself"});
+        ret.add(new String[]{"multipart-inside-itself-binary"});
+        ret.add(new String[]{"multipart-number-browser"});
+        ret.add(new String[]{"multipart-number-strict"});
+        ret.add(new String[]{"multipart-sjis"});
+        ret.add(new String[]{"multipart-strange-quoting"});
+        ret.add(new String[]{"multipart-unicode-names"});
+        ret.add(new String[]{"multipart-uppercase"});
+        ret.add(new String[]{"multipart-x-www-form-urlencoded"});
+        ret.add(new String[]{"multipart-zencoding"});
 
         return ret;
     }
@@ -105,7 +119,8 @@ public class MultiPartParsingTest
                 assertThat("Part[" + expected.name + "]", part, is(notNullValue()));
                 try (InputStream partInputStream = part.getInputStream())
                 {
-                    String contents = IO.toString(partInputStream);
+                    String charset = getCharsetFromContentType(part.getContentType(), UTF_8);
+                    String contents = IO.toString(partInputStream, charset);
                     assertThat("Part[" + expected.name + "].contents", contents, containsString(expected.value));
                 }
             }
@@ -119,7 +134,7 @@ public class MultiPartParsingTest
             }
 
             // Evaluate expected contents checksums
-            for (NameValue expected : multipartExpectations.partFilenames)
+            for (NameValue expected : multipartExpectations.partSha1sums)
             {
                 Part part = parser.getPart(expected.name);
                 assertThat("Part[" + expected.name + "]", part, is(notNullValue()));
@@ -139,6 +154,26 @@ public class MultiPartParsingTest
     private MultipartConfigElement newMultipartConfigElement(Path path)
     {
         return new MultipartConfigElement(path.toString(), MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
+    }
+
+    private String getCharsetFromContentType(String contentType, Charset defaultCharset)
+    {
+        if(StringUtil.isBlank(contentType))
+        {
+            return defaultCharset.toString();
+        }
+
+        QuotedStringTokenizer tok = new QuotedStringTokenizer(contentType, ";", false, false);
+        while(tok.hasMoreTokens())
+        {
+            String str = tok.nextToken().trim();
+            if(str.startsWith("charset="))
+            {
+                return str.substring("charset=".length());
+            }
+        }
+
+        return defaultCharset.toString();
     }
 
     public static class NameValue
